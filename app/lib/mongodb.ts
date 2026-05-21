@@ -1,10 +1,14 @@
 import mongoose from "mongoose";
 
-const dbUrl = "mongodb://localhost:27017/authBasic";
+const dbUrl = process.env.MONGODB_URL;
 
 export const connectDb = async () => {
   try {
-    await mongoose.connect(dbUrl);
+    if (dbUrl) {
+      await mongoose.connect(dbUrl);
+    } else {
+      console.log("No database url detected");
+    }
     console.log("Connected to MongoDB");
   } catch (error) {
     console.log(error);
