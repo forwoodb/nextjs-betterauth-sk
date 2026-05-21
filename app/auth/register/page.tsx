@@ -1,24 +1,53 @@
+import { connectDb } from "@/app/lib/mongodb";
 import Link from "next/link";
 
 const RegisterPage = () => {
   const createUserAction = async (formData: FormData) => {
     "use server";
+    await connectDb();
+
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    console.log(formData);
   };
 
   return (
     <div className="flex flex-col items-center">
-      <h2>Register</h2>
-      <form action="">
+      <h1>Register Page</h1>
+      <form action={createUserAction}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend className="fieldset-legend">Login</legend>
+          <legend className="fieldset-legend">Register</legend>
+
+          <label className="label">Name</label>
+          <input
+            type="name"
+            name="name"
+            className="input"
+            placeholder="Name"
+            required
+          />
 
           <label className="label">Email</label>
-          <input type="email" className="input" placeholder="Email" />
+          <input
+            type="email"
+            name="email"
+            className="input"
+            placeholder="Email"
+            required
+          />
 
           <label className="label">Password</label>
-          <input type="password" className="input" placeholder="Password" />
+          <input
+            type="password"
+            name="password"
+            className="input"
+            placeholder="Password"
+            required
+          />
 
-          <button className="btn btn-neutral mt-4">Login</button>
+          <button className="btn btn-neutral mt-4">Register</button>
         </fieldset>
       </form>
       <p>
