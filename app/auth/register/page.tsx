@@ -1,6 +1,10 @@
 import Link from "next/link";
 
 const RegisterPage = () => {
+  const createUserAction = async (formData: FormData) => {
+    "use server";
+  };
+
   return (
     <div className="flex flex-col items-center">
       <h2>Register</h2>
