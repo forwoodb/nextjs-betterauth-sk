@@ -1,33 +1,9 @@
-import { headers } from "next/headers";
-import { auth } from "../lib/auth";
-import Link from "next/link";
+import AuthButton from "./AuthButton";
 
-const Header = async () => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  const logoutUserAction = async () => {
-    "use server";
-
-    await auth.api.signOut({
-      headers: await headers(),
-    });
-  };
-
-  console.log(session);
-
+const Header = () => {
   return (
     <div>
-      {session ? (
-        <form action={logoutUserAction}>
-          <button className="btn">Log Out</button>
-        </form>
-      ) : (
-        <Link href={"/auth/login"} className="btn">
-          Log In/Register
-        </Link>
-      )}
+      <AuthButton />
     </div>
   );
 };
