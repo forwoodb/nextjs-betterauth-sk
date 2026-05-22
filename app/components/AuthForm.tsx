@@ -45,7 +45,9 @@ const AuthForm = ({ mode, formAction }: AuthFormTypes) => {
             required
           />
 
-          <button className="btn btn-neutral mt-4">Register</button>
+          <button className="btn btn-neutral mt-4">
+            {mode === "login" ? "Log In" : "Register"}
+          </button>
         </fieldset>
       </form>
       <p>
