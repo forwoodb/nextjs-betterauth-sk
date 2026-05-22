@@ -7,12 +7,22 @@ const Header = async () => {
     headers: await headers(),
   });
 
+  const logoutUserAction = async () => {
+    "use server";
+
+    await auth.api.signOut({
+      headers: await headers(),
+    });
+  };
+
   console.log(session);
 
   return (
     <div>
       {session ? (
-        <button className="btn">Log Out</button>
+        <form action={logoutUserAction}>
+          <button className="btn">Log Out</button>
+        </form>
       ) : (
         <Link href={"/auth/login"} className="btn">
           Log In/Register
