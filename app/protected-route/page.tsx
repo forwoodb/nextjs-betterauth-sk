@@ -11,8 +11,6 @@ const ProtectedPage = async () => {
     redirect("/auth/login");
   }
 
-  console.log(session);
-
   return (
     <>
       <h1>Protected Dashboard Page</h1>
