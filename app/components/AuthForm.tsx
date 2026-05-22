@@ -1,14 +1,24 @@
+"use client";
 import Link from "next/link";
+import { useActionState } from "react";
 
+type LoginState = {
+  message: string | null;
+};
 interface AuthFormTypes {
   mode: string;
-  formAction: (formData: FormData) => Promise<void>;
+  formAction: (
+    prevState: LoginState,
+    formData: FormData,
+  ) => Promise<LoginState>;
 }
 
 const AuthForm = ({ mode, formAction }: AuthFormTypes) => {
+  const [state, action] = useActionState(formAction, { message: null });
   return (
     <div className="flex flex-col items-center">
-      <form action={formAction}>
+      {state?.message && <p>{state.message}</p>}
+      <form action={action}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend">
             {mode === "login" ? "Log In" : `Register`}
