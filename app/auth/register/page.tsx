@@ -1,7 +1,6 @@
 import AuthForm from "@/app/components/AuthForm";
 import { auth } from "@/app/lib/auth";
 import { connectDb } from "@/app/lib/mongodb";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
 const RegisterPage = () => {
@@ -23,15 +22,13 @@ const RegisterPage = () => {
       },
     });
 
-    // console.log(response);
-
     redirect("/protected-route");
   };
 
   return (
     <>
       <h1>Register Page</h1>
-      <AuthForm formAction={createUserAction} />
+      <AuthForm mode="register" formAction={createUserAction} />
     </>
   );
 };

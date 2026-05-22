@@ -1,11 +1,17 @@
 import AuthForm from "@/app/components/AuthForm";
-import React from "react";
+import { connectDb } from "@/app/lib/mongodb";
 
 const LoginPage = () => {
+  const loginUserAction = async (formData: FormData) => {
+    "use server";
+    await connectDb();
+
+    console.log(formData);
+  };
   return (
     <>
       <h1>Login Page</h1>
-      <AuthForm />
+      <AuthForm mode="login" formAction={loginUserAction} />
     </>
   );
 };

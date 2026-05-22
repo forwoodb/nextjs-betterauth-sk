@@ -1,24 +1,31 @@
 import Link from "next/link";
 
 interface AuthFormTypes {
+  mode: string;
   formAction: (formData: FormData) => Promise<void>;
 }
 
-const AuthForm = ({ formAction }: AuthFormTypes) => {
+const AuthForm = ({ mode, formAction }: AuthFormTypes) => {
   return (
     <div className="flex flex-col items-center">
       <form action={formAction}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend className="fieldset-legend">Register</legend>
+          <legend className="fieldset-legend">
+            {mode === "login" ? "Log In" : `Register`}
+          </legend>
 
-          <label className="label">Name</label>
-          <input
-            type="name"
-            name="name"
-            className="input"
-            placeholder="Name"
-            required
-          />
+          {mode === "register" && (
+            <>
+              <label className="label">Name</label>
+              <input
+                type="name"
+                name="name"
+                className="input"
+                placeholder="Name"
+                required
+              />
+            </>
+          )}
 
           <label className="label">Email</label>
           <input
@@ -42,13 +49,22 @@ const AuthForm = ({ formAction }: AuthFormTypes) => {
         </fieldset>
       </form>
       <p>
-        Already have an account?{" "}
-        <Link
-          href={`/auth/login`}
-          className="h-4 border-b border-blue-800 text-blue-800"
-        >
-          Log In
-        </Link>
+        {mode === "login" ? `Don't` : `Already`} have an account?{" "}
+        {mode === "login" ? (
+          <Link
+            href={`/auth/register`}
+            className="h-4 border-b border-blue-800 text-blue-800"
+          >
+            Register
+          </Link>
+        ) : (
+          <Link
+            href={`/auth/login`}
+            className="h-4 border-b border-blue-800 text-blue-800"
+          >
+            Log In
+          </Link>
+        )}
       </p>
     </div>
   );
