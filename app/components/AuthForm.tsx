@@ -1,6 +1,10 @@
 import Link from "next/link";
 
-const AuthForm = ({ formAction }) => {
+interface AuthFormTypes {
+  formAction: (formData: FormData) => Promise<void>;
+}
+
+const AuthForm = ({ formAction }: AuthFormTypes) => {
   return (
     <div className="flex flex-col items-center">
       <form action={formAction}>
