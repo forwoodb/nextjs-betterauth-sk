@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { LoginState } from "@/app/lib/types";
 
 const RegisterPage = () => {
-  const createUserAction = async (
+  const registerEmailAction = async (
     prevState: LoginState,
     formData: FormData,
   ) => {
@@ -34,10 +34,17 @@ const RegisterPage = () => {
     redirect("/protected-route");
   };
 
+  const registerGoogleAction = async (formData: FormData) => {
+    "use server";
+    await connectDb();
+
+    console.log(formData);
+  };
+
   return (
     <>
       <h1>Register Page</h1>
-      <AuthForm mode="register" formAction={createUserAction} />
+      <AuthForm mode="register" emailAction={registerEmailAction} />
     </>
   );
 };
