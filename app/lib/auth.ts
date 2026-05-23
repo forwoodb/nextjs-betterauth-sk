@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 import { nextCookies } from "better-auth/next-js";
+import { admin } from "better-auth/plugins";
 
 const dbUrl = process.env.MONGODB_URL;
 
@@ -17,10 +18,9 @@ export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL,
   socialProviders: {
     google: {
-      // enabled: true,
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
   },
-  plugins: [nextCookies()], // make sure this is the last plugin in the array
+  plugins: [admin(), nextCookies()],
 });
