@@ -2,10 +2,7 @@ import AuthForm from "@/app/components/AuthForm";
 import { auth } from "@/app/lib/auth";
 import { connectDb } from "@/app/lib/mongodb";
 import { redirect } from "next/navigation";
-
-type LoginState = {
-  message: string | null;
-};
+import { LoginState } from "@/app/lib/types";
 
 const LoginPage = () => {
   const loginUserAction = async (prevState: LoginState, formData: FormData) => {
@@ -22,15 +19,12 @@ const LoginPage = () => {
           password,
         },
       });
-
-      return { message: null };
     } catch (error) {
       const err = error as Error;
-      console.log(err.message);
       return { message: err.message };
     }
 
-    // redirect("/protected-route");
+    redirect("/protected-route");
   };
   return (
     <>

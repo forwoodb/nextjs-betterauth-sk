@@ -1,10 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useActionState } from "react";
-
-type LoginState = {
-  message: string | null;
-};
+import { LoginState } from "../lib/types";
 interface AuthFormTypes {
   mode: string;
   formAction: (

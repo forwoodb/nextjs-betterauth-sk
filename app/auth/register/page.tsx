@@ -2,9 +2,13 @@ import AuthForm from "@/app/components/AuthForm";
 import { auth } from "@/app/lib/auth";
 import { connectDb } from "@/app/lib/mongodb";
 import { redirect } from "next/navigation";
+import { LoginState } from "@/app/lib/types";
 
 const RegisterPage = () => {
-  const createUserAction = async (formData: FormData) => {
+  const createUserAction = async (
+    prevState: LoginState,
+    formData: FormData,
+  ) => {
     "use server";
     await connectDb();
 
@@ -14,13 +18,18 @@ const RegisterPage = () => {
 
     console.log(name, email, password);
 
-    await auth.api.signUpEmail({
-      body: {
-        name,
-        email,
-        password,
-      },
-    });
+    try {
+      await auth.api.signUpEmail({
+        body: {
+          name,
+          email,
+          password,
+        },
+      });
+    } catch (error) {
+      const err = error as Error;
+      return { message: err.message };
+    }
 
     redirect("/protected-route");
   };
