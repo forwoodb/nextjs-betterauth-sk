@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { LoginState } from "../lib/types";
+import { loginGoogleAction } from "../lib/actions";
 interface AuthFormTypes {
   mode: string;
   emailAction: (
@@ -10,8 +11,9 @@ interface AuthFormTypes {
   ) => Promise<LoginState>;
 }
 
-const AuthForm = ({ mode, emailAction, googleAction }: AuthFormTypes) => {
+const AuthForm = ({ mode, emailAction }: AuthFormTypes) => {
   const [state, action] = useActionState(emailAction, { message: null });
+
   return (
     <div className="flex flex-col items-center">
       {state?.message && <p className="text-red-500">{state.message}</p>}
@@ -58,7 +60,7 @@ const AuthForm = ({ mode, emailAction, googleAction }: AuthFormTypes) => {
         </fieldset>
       </form>
       <p>Or</p>
-      <form action={googleAction}>
+      <form action={loginGoogleAction}>
         <button className="btn bg-white text-black border-[#e5e5e5]">
           <svg
             aria-label="Google logo"
@@ -87,7 +89,7 @@ const AuthForm = ({ mode, emailAction, googleAction }: AuthFormTypes) => {
               ></path>
             </g>
           </svg>
-          Login with Google
+          {mode === "login" ? "Log In" : "Register"} with Google
         </button>
       </form>
       <p>

@@ -15,8 +15,6 @@ const AuthButton = async () => {
     });
   };
 
-  console.log(session);
-
   return (
     <div>
       {session ? (
