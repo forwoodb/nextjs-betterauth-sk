@@ -9,10 +9,12 @@ const AdminPage = async () => {
   return (
     <main>
       <h1>Admin Page</h1>
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
           </tr>
         </thead>
         <tbody>
@@ -20,6 +22,14 @@ const AdminPage = async () => {
             return (
               <tr key={user._id}>
                 <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.role}</td>
+                <td>
+                  <button className="btn">Edit</button>
+                </td>
+                <td>
+                  <button className="btn">Delete</button>
+                </td>
               </tr>
             );
           })}
