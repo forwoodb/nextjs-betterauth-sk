@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { connectDb } from "../lib/mongodb";
 import { User } from "../models/User";
 import Link from "next/link";
@@ -5,7 +6,22 @@ import Link from "next/link";
 const AdminPage = async () => {
   await connectDb();
 
+  // Get users
   const users = User.find({});
+
+  // Delete a user
+  const deleteUserAction = async (formData: FormData) => {
+    "use server";
+    await connectDb();
+
+    const id = formData.get("id");
+
+    await User.findByIdAndDelete(id);
+
+    revalidatePath("/admin");
+
+    console.log(id);
+  };
 
   return (
     <main>
@@ -31,7 +47,10 @@ const AdminPage = async () => {
                   </Link>
                 </td>
                 <td>
-                  <button className="btn">Delete</button>
+                  <form action={deleteUserAction}>
+                    <input type="hidden" name="id" value={user._id} />
+                    <button className="btn">Delete</button>
+                  </form>
                 </td>
               </tr>
             );
