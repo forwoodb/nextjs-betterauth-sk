@@ -2,12 +2,34 @@ import { revalidatePath } from "next/cache";
 import { connectDb } from "../lib/mongodb";
 import { User } from "../models/User";
 import Link from "next/link";
+import { auth } from "../lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+
+interface UserType {
+  _id: string;
+  name: string;
+  email: string;
+  role: string;
+}
 
 const AdminPage = async () => {
   await connectDb();
 
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  // Uncomment this once admin user(s) is created
+  if (session?.user.role !== "admin") {
+    redirect("/");
+  }
+
+  console.log(session);
+
   // Get users
-  const users = User.find({});
+  const data = await User.find({}).lean();
+  const users = JSON.parse(JSON.stringify(data));
 
   // Delete a user
   const deleteUserAction = async (formData: FormData) => {
@@ -33,7 +55,7 @@ const AdminPage = async () => {
           </tr>
         </thead>
         <tbody>
-          {(await users).map((user) => {
+          {(await users).map((user: UserType) => {
             return (
               <tr key={user._id}>
                 <td>{user.name}</td>
