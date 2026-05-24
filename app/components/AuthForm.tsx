@@ -6,14 +6,14 @@ import { loginGoogleAction } from "../lib/actions";
 
 interface AuthFormTypes {
   mode: string;
-  emailAction: (
+  formAction: (
     prevState: LoginState,
     formData: FormData,
   ) => Promise<LoginState>;
 }
 
-const AuthForm = ({ mode, emailAction }: AuthFormTypes) => {
-  const [state, action] = useActionState(emailAction, { message: null });
+const AuthForm = ({ mode, formAction }: AuthFormTypes) => {
+  const [state, action] = useActionState(formAction, { message: null });
 
   return (
     <div className="flex flex-col items-center">

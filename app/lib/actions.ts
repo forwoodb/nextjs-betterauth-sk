@@ -4,6 +4,7 @@ import { connectDb } from "./mongodb";
 import { auth } from "./auth";
 
 export const loginGoogleAction = async () => {
+  // "use server";
   await connectDb();
 
   const response = await auth.api.signInSocial({

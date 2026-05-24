@@ -15,7 +15,7 @@ const AuthButton = async () => {
       headers: await headers(),
     });
 
-    redirect("/login");
+    redirect("/auth/login");
   };
 
   return (
