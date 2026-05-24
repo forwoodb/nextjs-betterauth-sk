@@ -20,8 +20,6 @@ const EditUserPage = async ({ params }: EditPageProps) => {
 
     await User.findByIdAndUpdate(id, { name, email, role });
 
-    console.log(name, email, role);
-
     redirect("/admin");
   };
 

@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import { auth } from "../lib/auth";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const AuthButton = async () => {
   const session = await auth.api.getSession({
@@ -13,6 +14,8 @@ const AuthButton = async () => {
     await auth.api.signOut({
       headers: await headers(),
     });
+
+    redirect("/login");
   };
 
   return (
