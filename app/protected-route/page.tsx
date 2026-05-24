@@ -14,7 +14,6 @@ const ProtectedPage = async () => {
   return (
     <>
       <h1>Protected Dashboard Page</h1>
-      <p>Hello {session?.user.name}</p>
     </>
   );
 };
