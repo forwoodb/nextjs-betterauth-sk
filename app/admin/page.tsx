@@ -19,8 +19,6 @@ const AdminPage = async () => {
     await User.findByIdAndDelete(id);
 
     revalidatePath("/admin");
-
-    console.log(id);
   };
 
   return (
