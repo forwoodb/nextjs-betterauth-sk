@@ -1,20 +1,35 @@
 import { User } from "@/app/models/User";
-import React from "react";
+import { redirect } from "next/navigation";
 
-const EditUserPage = async ({ params }) => {
+interface EditPageProps {
+  params: Promise<{ id: string }>;
+}
+
+const EditUserPage = async ({ params }: EditPageProps) => {
   const { id } = await params;
 
   const data = await User.findOne({ _id: id }).lean();
   const user = JSON.parse(JSON.stringify(data));
 
-  console.log(user);
+  const updateUser = async (formData: FormData) => {
+    "use server";
+
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const role = formData.get("role");
+
+    await User.findByIdAndUpdate(id, { name, email, role });
+
+    console.log(name, email, role);
+
+    redirect("/admin");
+  };
 
   return (
     <main>
       <h1>Edit User Page</h1>
       <form
-        // action={updateUser}
-        action=""
+        action={updateUser}
         className="flex flex-col gap-4 w-xs p-4 mx-auto"
       >
         <input type="text" name="name" value={user.name} className="input" />
