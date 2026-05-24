@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import { auth } from "../lib/auth";
 import AuthButton from "./AuthButton";
+import Navbar from "./Navbar";
 
 const Header = async () => {
   const session = await auth.api.getSession({
@@ -9,6 +10,7 @@ const Header = async () => {
 
   return (
     <div>
+      <Navbar />
       <AuthButton />
       {session && <p>Hello {session?.user.name}</p>}
     </div>
