@@ -1,5 +1,6 @@
 import { connectDb } from "../lib/mongodb";
 import { User } from "../models/User";
+import Link from "next/link";
 
 const AdminPage = async () => {
   await connectDb();
@@ -25,7 +26,9 @@ const AdminPage = async () => {
                 <td>{user.email}</td>
                 <td>{user.role}</td>
                 <td>
-                  <button className="btn">Edit</button>
+                  <Link href={`/admin/edit/${user._id}`} className="btn">
+                    Edit
+                  </Link>
                 </td>
                 <td>
                   <button className="btn">Delete</button>
