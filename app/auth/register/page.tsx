@@ -52,7 +52,7 @@ const RegisterPage = () => {
   return (
     <>
       <h1>Register Page</h1>
-      <AuthForm mode="register" emailAction={registerEmailAction} />
+      <AuthForm mode="register" formAction={registerEmailAction} />
     </>
   );
 };
