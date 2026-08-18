@@ -21,15 +21,14 @@ const AdminPage = async () => {
   });
 
   // Uncomment this once admin user(s) is created
-  // if (session?.user.role !== "admin") {
-  //   redirect("/");
-  // }
-
-  console.log(session);
+  if (session?.user.role !== "admin") {
+    redirect("/");
+  }
 
   // Get users
   const data = await User.find({}).lean();
   const users = JSON.parse(JSON.stringify(data));
+  console.log(users);
 
   // Delete a user
   const deleteUserAction = async (formData: FormData) => {

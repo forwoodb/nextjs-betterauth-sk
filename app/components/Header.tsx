@@ -9,7 +9,7 @@ const Header = async () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar user={session?.user} />
       {session && <p>Hello {session?.user.name}</p>}
     </div>
   );

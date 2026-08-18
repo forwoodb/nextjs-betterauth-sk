@@ -1,7 +1,9 @@
 import AuthButton from "./AuthButton";
 import Link from "next/link";
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
+  // console.log(user.role);
+
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -33,9 +35,11 @@ const Navbar = () => {
             <li>
               <Link href={"/protected-route"}>Protected</Link>
             </li>
-            <li>
-              <Link href={"/admin"}>Admin</Link>
-            </li>
+            {user?.role === "admin" && (
+              <li>
+                <Link href={"/admin"}>Admin</Link>
+              </li>
+            )}
           </ul>
         </div>
         <a className="btn btn-ghost text-xl">AuthStarter</a>
@@ -48,9 +52,11 @@ const Navbar = () => {
           <li>
             <Link href={"/protected-route"}>Protected</Link>
           </li>
-          <li>
-            <Link href={"/admin"}>Admin</Link>
-          </li>
+          {user?.role === "admin" && (
+            <li>
+              <Link href={"/admin"}>Admin</Link>
+            </li>
+          )}
         </ul>
       </div>
       <div className="navbar-end">
