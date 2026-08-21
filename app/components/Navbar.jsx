@@ -35,11 +35,12 @@ const Navbar = ({ user }) => {
             <li>
               <Link href={"/protected-route"}>Protected</Link>
             </li>
-            {user?.role === "admin" && (
-              <li>
-                <Link href={"/admin"}>Admin</Link>
-              </li>
-            )}
+            {/* Uncomment this once admin user(s) is created */}
+            {/* {user?.role === "admin" && ( */}
+            <li>
+              <Link href={"/admin"}>Admin</Link>
+            </li>
+            {/* )} */}
           </ul>
         </div>
         <a className="btn btn-ghost text-xl">AuthStarter</a>
@@ -52,11 +53,12 @@ const Navbar = ({ user }) => {
           <li>
             <Link href={"/protected-route"}>Protected</Link>
           </li>
-          {user?.role === "admin" && (
-            <li>
-              <Link href={"/admin"}>Admin</Link>
-            </li>
-          )}
+          {/* Uncomment this once admin user(s) is created */}
+          {/* {user?.role === "admin" && ( */}
+          <li>
+            <Link href={"/admin"}>Admin</Link>
+          </li>
+          {/* )} */}
         </ul>
       </div>
       <div className="navbar-end">
