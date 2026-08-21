@@ -16,14 +16,14 @@ interface UserType {
 const AdminPage = async () => {
   await connectDb();
 
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  // // Uncomment this once admin user(s) is created
 
-  // Uncomment this once admin user(s) is created
-  if (session?.user.role !== "admin") {
-    redirect("/");
-  }
+  // const session = await auth.api.getSession({
+  //   headers: await headers(),
+  // });
+  // if (session?.user.role !== "admin") {
+  //   redirect("/");
+  // }
 
   // Get users
   const data = await User.find({}).lean();
